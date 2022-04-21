@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./styleScore.css";
 
 export default function GameScore(props) {
+  const url = process.env.REACT_APP_SERVER;
   const { id } = useParams();
   const [state, setState] = useState({
     scores: [],
@@ -11,7 +12,7 @@ export default function GameScore(props) {
   let navigate = useNavigate();
 
   async function getScores(gameid) {
-    await fetch('http://localhost:3000/game/'+gameid+'/score', {
+    await fetch(url + '/game/'+gameid+'/score', {
       crossDomain: true,
       method: 'GET'
     }).then(res => res.json()).then(data => {

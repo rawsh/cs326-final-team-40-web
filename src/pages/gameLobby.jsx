@@ -3,12 +3,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./styleLobby.css";
 
 export default function GameLobby(props) {
+  const url = process.env.REACT_APP_SERVER;
   const { id, playerid } = useParams();
   const [state, setState] = useState([]);
   let navigate = useNavigate(); 
 
   async function getPlayers(gameid, playerid) {
-    await fetch('http://localhost:3000/game/'+gameid+'/playerlist', {
+    await fetch(url + '/game/'+gameid+'/playerlist', {
       crossDomain: true,
       method: 'GET'
     }).then(res => res.json()).then(data => {

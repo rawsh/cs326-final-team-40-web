@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function GameNew(props) {
+  const url = process.env.REACT_APP_SERVER;
   const [gameId, setGameId] = useState('');
   const [name, setName] = useState('');
   let navigate = useNavigate(); 
@@ -11,7 +12,7 @@ export default function GameNew(props) {
       alert("Please enter a name");
       return;
     }
-    const response = await fetch('http://localhost:3000/newgame', {
+    const response = await fetch(url+'/newgame', {
       crossDomain: true,
       method: 'POST'
     });
@@ -22,7 +23,7 @@ export default function GameNew(props) {
   }
 
   async function joinGame(gameID, playerName) {
-    const response = await fetch('http://localhost:3000/game/'+gameID+"/"+playerName+"/join", {
+    const response = await fetch(url + '/game/'+gameID+"/"+playerName+"/join", {
       crossDomain: true,
       method: 'POST'
     });

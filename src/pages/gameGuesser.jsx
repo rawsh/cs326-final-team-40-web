@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import "./styleGame.css";
 
 export default function Game(props) {
+  const url = process.env.REACT_APP_SERVER;
   const { id, playerid } = useParams();
   const [state, setState] = useState([]);
   const [guesses, setGuesses] = useState({});
 
   async function getGameState(gameid, playerid) {
-    await fetch('http://localhost:3000/game/'+gameid+'/'+playerid+'/guesses', {
+    await fetch(url + '/game/'+gameid+'/'+playerid+'/guesses', {
       crossDomain: true,
       method: 'GET'
     }).then(response => response.json()).then(data => {
@@ -29,7 +30,7 @@ export default function Game(props) {
   async function saveGuesses() {
     for await (let player of state) {
       if (player.player !== playerid && guesses[player.player] !== player.guesses.at(-1)) {
-        await fetch('http://localhost:3000/game/'+id+'/'+playerid+'/guess/'+player.player, {
+        await fetch(url + '/game/'+id+'/'+playerid+'/guess/'+player.player, {
           crossDomain: true,
           method: 'PUT',
           headers: {

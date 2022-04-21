@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import "./styleDraw.css";
 
 const Canvas = (props) => {
+    const url = process.env.REACT_APP_SERVER;
     const colorOptions = ["black", "red","orange","yellow","green","blue", "purple" ]
     const canvasRef = useRef(null)
 
@@ -11,7 +12,7 @@ const Canvas = (props) => {
     let navigate = useNavigate();
 
     async function getPlayerWord(gameid, playerid) {
-        await fetch('http://localhost:3000/game/'+gameid+'/'+playerid +'/word', {
+        await fetch(url + '/game/'+gameid+'/'+playerid +'/word', {
             crossDomain: true,
             method: 'GET'
         }).then(res => res.json()).then(data => {
@@ -25,7 +26,7 @@ const Canvas = (props) => {
 
     async function putCanvas() {
         const canvasData = canvasRef.current.toDataURL();
-        await fetch('http://localhost:3000/game/'+id+'/'+playerid +'/canvas', {
+        await fetch(url + '/game/'+id+'/'+playerid +'/canvas', {
             crossDomain: true,
             method: 'PUT',
             headers: {
