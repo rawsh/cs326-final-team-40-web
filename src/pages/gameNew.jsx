@@ -11,15 +11,16 @@ export default function GameNew(props) {
     if (name === "") {
       alert("Please enter a name");
       return;
+    } else {
+      const response = await fetch(url+'/newgame', {
+        crossDomain: true,
+        method: 'POST'
+      });
+      const data = await response.json();
+      setGameId(data.gameID);
+      await joinGame(data.gameID, name);
+      navigate('/' + data.gameID + '/' + name + '/lobby');
     }
-    const response = await fetch(url+'/newgame', {
-      crossDomain: true,
-      method: 'POST'
-    });
-    const data = await response.json();
-    setGameId(data.gameID);
-    await joinGame(data.gameID, name);
-    navigate('/' + data.gameID + '/' + name + '/lobby');
   }
 
   async function joinGame(gameID, playerName) {

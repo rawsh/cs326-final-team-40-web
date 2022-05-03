@@ -12,7 +12,7 @@ const Canvas = (props) => {
     let navigate = useNavigate();
 
     async function getPlayerWord(gameid, playerid) {
-        await fetch(url + '/game/'+gameid+'/'+playerid +'/word', {
+        await fetch(url + '/game/'+gameid+'/'+playerid +'/state', {
             crossDomain: true,
             method: 'GET'
         }).then(res => res.json()).then(data => {
@@ -127,7 +127,7 @@ const Canvas = (props) => {
 
     return (
         <div className='draw'>
-            <div className = "keyword" id = "theWord">Your word is <b>{state.myWord}</b></div>
+            <div className = "keyword" id = "theWord">Your word is <b>{state.word}</b></div>
             <div className='draw-container'>
                 <div className="tool-board" id = "artTools">
                     <div>
