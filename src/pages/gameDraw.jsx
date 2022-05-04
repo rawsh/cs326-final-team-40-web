@@ -36,7 +36,6 @@ const Canvas = (props) => {
                 canvas: canvasData
             }),
         }).then(res => res.json()).then(data => {
-            console.log(data);
             navigate('/'+id+'/' + playerid + '/guess');
         }).catch(err => {
             // setHasError(true);

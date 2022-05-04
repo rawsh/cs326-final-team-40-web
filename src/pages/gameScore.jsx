@@ -16,7 +16,6 @@ export default function GameScore(props) {
       crossDomain: true,
       method: 'GET'
     }).then(res => res.json()).then(data => {
-      console.log(data);
       setState(data);
     }).catch(err => {
       // setHasError(true);
