@@ -8,14 +8,11 @@ export default function GameLobby(props) {
   const [state, setState] = useState([]);
   let navigate = useNavigate(); 
 
-  async function getPlayers(gameid, playerid) {
+  async function getPlayers(gameid) {
     await fetch(url + '/game/'+gameid+'/playerlist', {
       crossDomain: true,
       method: 'GET'
     }).then(res => res.json()).then(data => {
-      // if (!(playerid in data)) {
-      //   navigate('/');
-      // }
       setState(data);
     }).catch(err => {
       // setHasError(true);
@@ -24,27 +21,13 @@ export default function GameLobby(props) {
     });
   }
 
-  // async function callStartGame(gameid) {
-  //   // TODO
-  //   await fetch('http://localhost:3000/game/'+gameid+'/start', {
-  //     crossDomain: true,
-  //     method: 'POST'
-  //   }).then(res => res.json()).then(data => {
-  //     console.log(data);
-  //   }).catch(err => {
-  //     // setHasError(true);
-  //     console.error(err);
-  //     return
-  //   });
-  // }
-
   async function startGame() {
     navigate('/'+id+'/' + playerid + '/draw');
   }
 
   useEffect(() => {
-    getPlayers(id, playerid);
-  }, [id, playerid]);
+    getPlayers(id);
+  }, [id]);
 
   return (
     <div>
