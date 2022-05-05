@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import "./styleGame.css";
 
@@ -7,6 +7,7 @@ export default function Game(props) {
   const { id, playerid } = useParams();
   const [state, setState] = useState([]);
   const [guesses, setGuesses] = useState({});
+  let navigate = useNavigate();
 
   async function getGameState(gameid, playerid) {
     await fetch(url + '/game/'+gameid+'/'+playerid+'/guesses', {
@@ -92,6 +93,9 @@ export default function Game(props) {
       <div>
         <p>Click on a guess to edit.</p>
         <button onClick={saveGuesses}>SAVE GUESSES</button>
+        <button onClick={() => {
+          navigate('/'+id+'/score');
+        }}>END GAME</button>
       </div>
       <div className="grid-container" id="allPlayers">
         {state.map((obj,idx) => {
@@ -113,16 +117,6 @@ export default function Game(props) {
           )
         })}
     </div>
-
-    {/* <div className="scorekeeper" id="scoreboard">
-        <h2>CURRENT SCORES:</h2>
-        <p>Player 1: _____</p>
-        <p>Player 2: _____</p>
-        <p>Player 3: _____</p>
-        <p>Player 4: _____</p>
-        <p>Player 5: _____</p>
-        <p>Player 6: _____</p>
-    </div> */}
   </div>
   );
 }
