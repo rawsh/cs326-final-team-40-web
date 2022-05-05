@@ -78,7 +78,7 @@ export default function Game(props) {
         onBlur={e => updateGuess(props.player, e.currentTarget.textContent)}
         onFocus={e => selectElementContents(e.currentTarget)}
         onKeyDown={e => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === 'Enter') {
             e.preventDefault();
             e.currentTarget.blur();
           }
